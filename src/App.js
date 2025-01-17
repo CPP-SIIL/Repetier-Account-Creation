@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import "./App.css";
-import flagImage from "./assets/index.png";
-import headerIcon from "./assets/icon.jpeg";
+import flagImage from "./assets/images/index.png";
+import headerIcon from "./assets/images/logo-60.png";
 
 const App = () => 
 {
   const [broncoId, setBroncoId] = useState(""); // For login
   const [userName, setUserName] = useState(""); // For name
   const [password, setPassword] = useState(""); // For password
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState(""); // For password confirmation
   const [message, setMessage] = useState(""); // For success/error messages
   
   const handleSubmit = async (e) => 
@@ -34,8 +34,8 @@ const App = () =>
     // const defaultPassword = password || broncoId;
 
     // API endpoint and API key
-    const apiUrl = "http://10.110.205.225:3344/printer/api/adminprinter";
-    const apiKey = "1d6928dd-59f9-4b30-a538-fd83236adf1e";
+    const apiUrl = process.env.REACT_API_URL;
+    const apiKey = process.env.REACT_API_KEY;
 
     // Data for the API request
     const requestData = 
@@ -79,8 +79,8 @@ const App = () =>
     // Form for creating an account
     <div className = "App">
       {/* Header Section */}
-      <header className="app-header">
-        <div className="header-left">
+      <header className = "app-header">
+        <div className = "header-left">
           <img
             src = {headerIcon}
             alt = "Logo"
@@ -152,14 +152,11 @@ const App = () =>
               required
             />
           </div>
-          <div className = "form-checkbox">
-            <label>
-              <input type = "checkbox" />Remember me
-            </label>
-          </div>
           <button type = "submit" className = "form-button">Create Account</button>
+          <div className = "form-message">
+            {message && (<div className = "error-box"><p>{message}</p></div>)}
+          </div>
         </form>
-        {message && <p style={{ color: "red", marginTop: "10px" }}>{message}</p>}
       </div>
     </div>
   );
