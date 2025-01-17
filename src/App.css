@@ -1,38 +1,186 @@
+/* General Styling */
+body {
+  background-color: #000000;
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+/* App Container */
 .App {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* Header Styling */
+.app-header {
+  position: fixed; /* Ensure the header stays at the top */
+  top: 0; /* Align to the top */
+  left: 0; /* Align to the left */
+  width: 100%; /* Make it span the full width of the page */
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  background-color: #046378; /* Dark teal background */
   color: white;
+  padding: 10px 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  z-index: 1000; /* Ensure it stays on top of other elements */
 }
 
-.App-link {
-  color: #61dafb;
+/* Left Section */
+.header-left {
+  display: flex;
+  align-items: center;
+  margin-left: 150px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.header-logo {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+}
+
+.header-title {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+/* Right Section */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-right: 200px;
+}
+
+.header-right i {
+  font-size: 18px;
+  margin-right: 15px;
+  cursor: pointer;
+}
+
+.header-flag {
+  width: 30px;
+  height: 20px;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+/* Form Header Styling */
+.form-header {
+  display: flex;
+  align-items: left;
+  justify-content: left;
+  background-color: #046378; /* Same teal background as the header */
+  color: white;
+  font-size: 18px; /* Adjust font size for the title */
+  font-weight: bold;
+  padding: 10px;
+  width: 100%;
+  border-top-left-radius: 3px; /* Rounded corners to match the form */
+  border-top-right-radius: 8px;
+  box-sizing: border-box;
+  margin: 0;
+  margin-bottom: 20px;
+}
+
+.form-header-icon {
+  font-size: 18px; /* Adjust icon size */
+  margin-right: 10px; /* Space between icon and text */
+}
+
+.form-header-title {
+  margin: 0;
+}
+
+/* Form Container */
+.form-container {
+  background-color: #1e1e1e;
+  padding: 0;
+  border-radius: 3px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  color: white;
+  width: 600px;
+  text-align: left;
+  margin-top: 5px; /* Adds space below the header */
+  margin: 0 auto;
+  overflow: hidden; /* Prevents content from overflowing */
+}
+
+/* Input Fields */
+.form-group {
+  margin-bottom: 20px;
+  margin-right: 23px;
+}
+
+.form-group label {
+  font-size: 14px;
+  font-weight: bold;
+  margin-left: 30px;
+  margin-bottom: 5px;
+  display: block;
+  color: #e0e0e0;
+}
+
+.form-input {
+  display: block;
+  padding: 10px;
+  font-size: 14px;
+  width: 90%;
+  border-radius: 3px;
+  border: 1px solid #444;
+  background-color: #262626;
+  color: #fff;
+  margin-left: 30px;
+}
+
+.form-input::placeholder {
+  color: #888;
+}
+
+/* Validation Error */
+.form-input.error {
+  border: 2px solid red;
+}
+
+/* Button Styling */
+.form-button {
+  display: block;
+  padding: 10px;
+  font-size: 16px;
+  width: 90%;
+  background-color: #00718a;
+  border: 1px solid #00718a;
+  border-radius: 3px;
+  color: white;
+  cursor: pointer;
+  text-align: center;
+  margin: 20px auto 0 auto;
+  margin-bottom: 20px;
+}
+
+.form-button:hover {
+  background-color: #00596c;
+}
+
+/* Checkbox Label */
+.form-checkbox {
+  margin-bottom: 20px;
+  font-size: 14px;
+  margin-left: 27px;
+}
+
+.form-checkbox input {
+  margin-right: 8px;
+}
+
+/* Error Message */
+.error-message {
+  color: red;
+  margin-top: 10px;
+  margin-left: 20px;
+  font-size: 14px;
 }

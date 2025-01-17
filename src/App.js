@@ -1,12 +1,16 @@
 import React, { useState } from "react";
+import "./App.css";
+import flagImage from "./assets/index.png";
+import headerIcon from "./assets/icon.jpeg";
 
 const App = () => 
 {
   const [broncoId, setBroncoId] = useState(""); // For login
-  const [name, setName] = useState(""); // For name
+  const [userName, setUserName] = useState(""); // For name
   const [password, setPassword] = useState(""); // For password
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [message, setMessage] = useState(""); // For success/error messages
-
+  
   const handleSubmit = async (e) => 
   {
     e.preventDefault(); // Prevent page reload
@@ -16,6 +20,13 @@ const App = () =>
     if (password && password.length < 8) 
     {
       setMessage("Error: Password must be at least 8 characters long.");
+      return;
+    }
+
+    // Password match validation
+    if (password !== confirmPassword) 
+    {
+      setMessage("Passwords do not match!");
       return;
     }
 
@@ -32,7 +43,7 @@ const App = () =>
       login: broncoId,
       password: defaultPassword, // Use user-provided password or default password as Bronco ID
       permissions: 3, // User permissions (adjust as needed)
-      name: name || broncoId, // Use Bronco ID as the fallback for name
+      name: userName || broncoId, // Use Bronco ID as the fallback for name
     };
 
     try 
@@ -64,73 +75,91 @@ const App = () =>
   };
 
   return (
-    <div style={{ textAlign: "center", marginTop: "50px" }}>
-      <h1>SIIL Account Creator</h1>
-      <form onSubmit = {handleSubmit}>
-        <div style = {{marginBottom: "20px"}}>
-          <input
-            type = "number"
-            placeholder = "Enter Bronco ID (Login)"
-            value = {broncoId}
-            onChange = {(e) => setBroncoId(e.target.value)}
-            style = {{padding: "10px", fontSize: "16px", width: "300px"}}
-            required
+
+    // Form for creating an account
+    <div className = "App">
+      {/* Header Section */}
+      <header className="app-header">
+        <div className="header-left">
+          <img
+            src = {headerIcon}
+            alt = "Logo"
+            className = "header-logo"
+          />
+          <span className = "header-title">Repetier-Server Pro 1.4.15</span>
+        </div>
+        <div className = "header-right">
+          <i className = "fas fa-expand-arrows-alt"></i>
+          <img
+            src = {flagImage}
+            alt = "Language"
+            className = "header-flag"
           />
         </div>
-        <div style = {{marginBottom: "20px"}}>
-          <input
-            type = "text"
-            placeholder = "Enter Name (Optional)"
-            value = {name}
-            onChange = {(e) => setName(e.target.value)}
-            style = {{padding: "10px", fontSize: "16px", width: "300px"}}
-          />
+      </header>
+
+      {/* Form Section */}
+      <div className = "form-container">
+        <div className = "form-header">
+          <i className = "fas fa-user form-header-icon"></i>
+          <span className = "form-header-title">Please create account</span>
         </div>
-        <div style = {{marginBottom: "20px"}}>
-          <input
-            type = "password"
-            placeholder = "Enter Password"
-            value = {password}
-            onChange = {(e) => setPassword(e.target.value)}
-            style = {{padding: "10px", fontSize: "16px", width: "300px"}}
-            required
-          />
-        </div>
-        <button
-          type = "submit"
-          style = {{padding: "10px 20px", fontSize: "16px", cursor: "pointer",}}
-        >
-          Create Account
-        </button>
-      </form>
-      <p>{message}</p>
-      <div
-        style={{
-          marginTop: "20px",
-          padding: "10px",
-          backgroundColor: "#f9f9f9",
-          border: "1px solid #ccc",
-          borderRadius: "5px",
-          fontSize: "14px",
-          color: "#333",
-          textAlign: "left",
-          margin: "auto",
-          display: "inline-block",
-        }}
-      >
-        <h2 style = {{fontSize: "16px", marginTop: "1px", marginBottom: "4px", marginLeft: "4px", color: "#333"}}>
-          Password Instructions:
-        </h2>
-        <ul style = {{margin: 0, paddingLeft: "20px"}}>
-          <li>Password must be at least <strong>8 characters</strong>.</li>
-          <li>
-            If no password is provided, your Bronco ID will be set as your
-            default password.
-          </li>
-          <li>
-            Ensure you remember your password. You can change it later if needed.
-          </li>
-        </ul>
+        <form onSubmit = {handleSubmit}>
+          <div className = "form-group">
+            <label htmlFor = "login">Login:</label>
+            <input
+              type = "number"
+              id = "login"
+              placeholder = "Login"
+              value = {broncoId}
+              onChange = {(e) => setBroncoId(e.target.value)}
+              className = "form-input"
+              required
+            />
+          </div>
+          <div className = "form-group">
+            <label htmlFor = "userName">User Name (Optional):</label>
+            <input
+              type = "text"
+              id = "userName"
+              placeholder = "User Name"
+              value = {userName}
+              onChange = {(e) => setUserName(e.target.value)}
+              className = "form-input"
+            />
+          </div>
+          <div className = "form-group">
+            <label htmlFor = "password">Password:</label>
+            <input
+              type = "password"
+              id = "password"
+              placeholder = "Password"
+              value = {password}
+              onChange = {(e) => setPassword(e.target.value)}
+              className = {`form-input`}
+              required
+            />
+          </div>
+          <div className = "form-group">
+            <label htmlFor = "confirmPassword">Confirm Password:</label>
+            <input
+              type = "password"
+              id = "confirmPassword"
+              placeholder = "Confirm Password"
+              value = {confirmPassword}
+              onChange = {(e) => setConfirmPassword(e.target.value)}
+              className = {`form-input`}
+              required
+            />
+          </div>
+          <div className = "form-checkbox">
+            <label>
+              <input type = "checkbox" /> Remember me
+            </label>
+          </div>
+          <button type = "submit" className = "form-button"> Create Account</button>
+        </form>
+        {message && <p style={{ color: "red", marginTop: "10px" }}>{message}</p>}
       </div>
     </div>
   );
