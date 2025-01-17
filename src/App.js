@@ -31,7 +31,7 @@ const App = () =>
     }
 
     // If password is not provided, set it to the Bronco ID
-    const defaultPassword = password || broncoId;
+    // const defaultPassword = password || broncoId;
 
     // API endpoint and API key
     const apiUrl = "http://10.110.205.225:3344/printer/api/adminprinter";
@@ -41,7 +41,7 @@ const App = () =>
     const requestData = 
     {
       login: broncoId,
-      password: defaultPassword, // Use user-provided password or default password as Bronco ID
+      password: password, // Use user-provided password or default password as Bronco ID
       permissions: 3, // User permissions (adjust as needed)
       name: userName || broncoId, // Use Bronco ID as the fallback for name
     };
@@ -86,7 +86,7 @@ const App = () =>
             alt = "Logo"
             className = "header-logo"
           />
-          <span className = "header-title">Repetier-Server Pro 1.4.15</span>
+          <span className = "header-title">Repetier-Server Pro 1.4.15 - SIIL</span>
         </div>
         <div className = "header-right">
           <i className = "fas fa-expand-arrows-alt"></i>
@@ -108,7 +108,7 @@ const App = () =>
           <div className = "form-group">
             <label htmlFor = "login">Login:</label>
             <input
-              type = "number"
+              type = "text"
               id = "login"
               placeholder = "Login"
               value = {broncoId}
@@ -154,10 +154,10 @@ const App = () =>
           </div>
           <div className = "form-checkbox">
             <label>
-              <input type = "checkbox" /> Remember me
+              <input type = "checkbox" />Remember me
             </label>
           </div>
-          <button type = "submit" className = "form-button"> Create Account</button>
+          <button type = "submit" className = "form-button">Create Account</button>
         </form>
         {message && <p style={{ color: "red", marginTop: "10px" }}>{message}</p>}
       </div>
