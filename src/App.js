@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./App.css";
 import flagImage from "./assets/images/index.png";
 import headerIcon from "./assets/images/logo-60.png";
+// require('dotenv').config();
 
 const App = () => 
 {
@@ -34,8 +35,9 @@ const App = () =>
     // const defaultPassword = password || broncoId;
 
     // API endpoint and API key
-    const apiUrl = process.env.REACT_API_URL;
-    const apiKey = process.env.REACT_API_KEY;
+    const apiUrl = process.env.REACT_APP_API_URL;
+    const apiKey = process.env.REACT_APP_API_KEY;
+    
 
     // Data for the API request
     const requestData = 
