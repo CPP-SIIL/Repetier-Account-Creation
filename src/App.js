@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import "./App.css";
 import flagImage from "./assets/images/index.png";
 import headerIcon from "./assets/images/logo-60.png";
-// require('dotenv').config();
 
 const App = () => 
 {
@@ -44,7 +43,7 @@ const App = () =>
     {
       login: broncoId,
       password: password, // Use user-provided password or default password as Bronco ID
-      permissions: 3, // User permissions (adjust as needed)
+      permissions: 8, // User permissions (adjust as needed)
       name: userName || broncoId, // Use Bronco ID as the fallback for name
     };
 
@@ -60,20 +59,40 @@ const App = () =>
       if (response.ok)
       {
         const data = await response.json();
-        setMessage(`Account created successfully: ${JSON.stringify(data)}`);
-        console.log("Success:", data);
+        if (data.success || data.status === "ok") 
+        {
+          console.log("API Response:", data);
+          setMessage("Account created successfully!");
+        }
+        else 
+        {
+          console.error("API Error Response:", data);
+          setMessage("User creation failed. Please try again.");
+        }
       } 
       else 
       {
-        setMessage("Error: Unable to create account.");
         console.error("Error:", response.statusText);
+        setMessage("Error: Unable to create account.");
       }
     } 
     catch (error) 
     {
+      console.error("Error:", error);
       setMessage("Error: Something went wrong.");
-      console.error("API Call Error:", error);
     }
+
+    // const messageElement = document.getElementById('message');
+    // const messageText = "Account created succesfully!";
+
+    // if (messageText === "Account created successfully!")
+    // {
+    //   messageElement.classList.add('success-message');
+    // }
+    // else
+    // {
+    //   messageElement.classList.remove('success-message');
+    // }
   };
 
   return (
@@ -155,6 +174,7 @@ const App = () =>
             />
           </div>
           <button type = "submit" className = "form-button">Create Account</button>
+
           <div className = "form-message">
             {message && (<div className = "error-box"><p>{message}</p></div>)}
           </div>

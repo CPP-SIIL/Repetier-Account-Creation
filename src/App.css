@@ -3,6 +3,7 @@ body {
   background-color: #101010;
   margin: 0;
   font-family: 'RobotoDraft', sans-serif;
+  overflow: hidden;
 }
 
 /* App Container */
@@ -35,7 +36,7 @@ body {
 .header-left {
   display: flex;
   align-items: center;
-  margin-left: 115px;
+  margin-left: 140px;
 }
 
 .header-logo {
@@ -53,7 +54,7 @@ body {
   display: flex;
   align-items: center;
   gap: 10px;
-  margin-right: 150px;
+  margin-right: 200px;
 }
 
 .header-right i {
@@ -179,5 +180,3 @@ body {
   margin-bottom: 20px;
   font-size: 14px;
 }
-
-
