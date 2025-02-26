@@ -11,9 +11,20 @@ const App = () =>
   const [password, setPassword] = useState(""); // For password
   const [confirmPassword, setConfirmPassword] = useState(""); // For password confirmation
   const [message, setMessage] = useState(""); // For success/error messages
+
+  const handleResetForm = () => 
+  {
+    // Clear all form states:
+    setBroncoId("");
+    setUserName("");
+    setPassword("");
+    setConfirmPassword("");
+    setMessage("");
+  };
   
   const handleSubmit = async (e) => 
   {
+    // Create a new SIIL account form
     e.preventDefault(); // Prevent page reload
     setMessage("Processing...");
 
@@ -84,18 +95,22 @@ const App = () =>
       console.error("Error:", error);
       setMessage("Error: Something went wrong.");
     }
+  };
 
-    // const messageElement = document.getElementById('message');
-    // const messageText = "Account created succesfully!";
-
-    // if (messageText === "Account created successfully!")
-    // {
-    //   messageElement.classList.add('success-message');
-    // }
-    // else
-    // {
-    //   messageElement.classList.remove('success-message');
-    // }
+  const handleToggleFullScreen = () => 
+  {
+    // Check if we’re already in full screen
+    if (!document.fullscreenElement) {
+      // Enter full screen
+      document.documentElement.requestFullscreen().catch((err) => {
+        console.error(`Failed to enter fullscreen: ${err.message}`);
+      });
+    } else {
+      // Exit full screen
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+      }
+    }
   };
 
   return (
@@ -104,7 +119,7 @@ const App = () =>
     <div className = "App">
       {/* Header Section */}
       <header className = "app-header">
-        <div className = "header-left">
+        <div className = "header-left" onClick = {handleResetForm} style = {{cursor: 'pointer'}}>
           <img
             src = {headerIcon}
             alt = "Logo"
@@ -113,7 +128,7 @@ const App = () =>
           <span className = "header-title">Repetier-Server Pro 1.4.15 - SIIL</span>
         </div>
         <div className = "header-right">
-          <i className = "fas fa-expand-arrows-alt"></i>
+          <i className = "fas fa-expand-arrows-alt" onClick = {handleToggleFullScreen} style = {{cursor: 'pointer'}}></i>
           <img
             src = {flagImage}
             alt = "Language"
@@ -179,7 +194,7 @@ const App = () =>
           <button type = "submit" className = "form-button">Create Account</button>
 
           <div className = "form-message">
-            {message && (<div className = "error-box"><p>{message}</p></div>)}
+            {message && (<div className = {message === "Account created successfully!" ? "success-box" : "error-box"}><p>{message}</p></div>)}
           </div>
         </form>
       </div>

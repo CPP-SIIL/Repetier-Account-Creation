@@ -180,3 +180,16 @@ body {
   margin-bottom: 20px;
   font-size: 14px;
 }
+
+.success-box {
+  display: block;
+  padding: 10px;
+  width: 450px;
+  background-color: #006400;
+  color: #ffffff;
+  border: 1px solid #006400;
+  border-radius: 3px;
+  margin-left: 40px;
+  margin-bottom: 20px;
+  font-size: 14px;
+}
