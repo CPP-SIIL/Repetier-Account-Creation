@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import CryptoJS from "crypto-js";
 import "./App.css";
 import flagImage from "./assets/images/index.png";
 import headerIcon from "./assets/images/logo-60.png";
@@ -19,7 +20,7 @@ const App = () =>
     // Password validation
     if (password && password.length < 8) 
     {
-      setMessage("Error: Password must be at least 8 characters long.");
+      setMessage("Password must be at least 8 characters long.");
       return;
     }
 
@@ -29,6 +30,8 @@ const App = () =>
       setMessage("Passwords do not match!");
       return;
     }
+
+    const hashedPassword = CryptoJS.MD5(broncoId + password).toString()
 
     // If password is not provided, set it to the Bronco ID
     // const defaultPassword = password || broncoId;
@@ -42,8 +45,8 @@ const App = () =>
     const requestData = 
     {
       login: broncoId,
-      password: password, // Use user-provided password or default password as Bronco ID
-      permissions: 8, // User permissions (adjust as needed)
+      password: hashedPassword, // Use user-provided password or default password as Bronco ID
+      permissions: 4097, // User permissions (adjust as needed)
       name: userName || broncoId, // Use Bronco ID as the fallback for name
     };
 
