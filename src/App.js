@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import CryptoJS from "crypto-js";
 import "./App.css";
 import flagImage from "./assets/images/index.png";
 import headerIcon from "./assets/images/logo-60.png";
+
 
 const App = () => 
 {
@@ -11,6 +12,7 @@ const App = () =>
   const [password, setPassword] = useState(""); // For password
   const [confirmPassword, setConfirmPassword] = useState(""); // For password confirmation
   const [message, setMessage] = useState(""); // For success/error messages
+  const [authorizedCode, setAuthorizedCode] = useState("")
 
   const handleResetForm = () => 
   {
@@ -20,6 +22,7 @@ const App = () =>
     setPassword("");
     setConfirmPassword("");
     setMessage("");
+    setAuthorizedCode("");
   };
   
   const handleSubmit = async (e) => 
@@ -46,6 +49,13 @@ const App = () =>
 
     // If password is not provided, set it to the Bronco ID
     // const defaultPassword = password || broncoId;
+
+    const validatedCode = "45257694"; //process.env.AUTHORIZED_CODE;
+    if (authorizedCode !== validatedCode)
+    {
+      setMessage("Please ask Ambassdor for correct authorized code!")
+      return;
+    }
 
     // API endpoint and API key
     const apiUrl = process.env.REACT_APP_API_URL;
@@ -76,25 +86,28 @@ const App = () =>
         if (data.success || data.status === "ok") 
         {
           console.log("API Response:", data);
+          handleResetForm()
           setMessage("Account created successfully!");
         }
         else 
         {
           console.error("API Error Response:", data);
-          setMessage("User creation failed. Please try again.");
+          setMessage("User creation failed. " + data.error);
         }
       } 
       else 
       {
         console.error("Error:", response.statusText);
-        setMessage("Error: Unable to create account.");
+        setMessage("Unable to create account.");
       }
     } 
     catch (error) 
     {
       console.error("Error:", error);
-      setMessage("Error: Something went wrong.");
+      setMessage("Something went wrong.");
     }
+
+
   };
 
   const handleToggleFullScreen = () => 
@@ -117,6 +130,7 @@ const App = () =>
 
     // Form for creating an account
     <div className = "App">
+      {/* <button onClick={handleSubmit}>Submit</button> */}
       {/* Header Section */}
       <header className = "app-header">
         <div className = "header-left" onClick = {handleResetForm} style = {{cursor: 'pointer'}}>
@@ -143,7 +157,7 @@ const App = () =>
           <i className = "fas fa-user form-header-icon"></i>
           <span className = "form-header-title">Please create account</span>
         </div>
-        <form onSubmit = {handleSubmit}>
+        <form className = "form-outer" onSubmit = {handleSubmit}>
           <div className = "form-group">
             <label htmlFor = "login">Login:</label>
             <input
@@ -187,6 +201,18 @@ const App = () =>
               placeholder = "Confirm Password"
               value = {confirmPassword}
               onChange = {(e) => setConfirmPassword(e.target.value)}
+              className = {`form-input`}
+              required
+            />
+          </div>
+          <div className = "form-group">
+            <label htmlFor = "authorizedCode">Authorized Code:</label>
+            <input
+              type = "text"
+              id = "authorizedCode"
+              placeholder="Authorized Code"
+              value = {authorizedCode}
+              onChange={(e) => setAuthorizedCode(e.target.value)}
               className = {`form-input`}
               required
             />

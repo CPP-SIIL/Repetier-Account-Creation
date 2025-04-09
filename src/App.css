@@ -36,7 +36,7 @@ body {
 .header-left {
   display: flex;
   align-items: center;
-  margin-left: 140px;
+  margin-left: 200px;
 }
 
 .header-logo {
@@ -192,4 +192,17 @@ body {
   margin-left: 40px;
   margin-bottom: 20px;
   font-size: 14px;
+}
+
+.permissions-manager-container {
+  background-color: #1e1e1e;
+  padding: 0;
+  border-radius: 3px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  color: white;
+  width: 550px;
+  text-align: left;
+  margin-top: 5px; /* Adds space below the header */
+  margin: 0 auto;
+  overflow: hidden; /* Prevents content from overflowing */
 }
