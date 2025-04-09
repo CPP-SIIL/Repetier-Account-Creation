@@ -50,7 +50,7 @@ const App = () =>
     // If password is not provided, set it to the Bronco ID
     // const defaultPassword = password || broncoId;
 
-    const validatedCode = "45257694"; //process.env.AUTHORIZED_CODE;
+    const validatedCode = process.env.AUTHORIZED_CODE;
     if (authorizedCode !== validatedCode)
     {
       setMessage("Please ask Ambassdor for correct authorized code!")
@@ -208,7 +208,7 @@ const App = () =>
           <div className = "form-group">
             <label htmlFor = "authorizedCode">Authorized Code:</label>
             <input
-              type = "text"
+              type = "password"
               id = "authorizedCode"
               placeholder="Authorized Code"
               value = {authorizedCode}
